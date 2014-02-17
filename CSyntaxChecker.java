@@ -1,7 +1,6 @@
 
-package up.cmsc141.julia.mp4.test1;
+package up.cmsc141.julia.mp4.test2;
 
-import up.cmsc141.julia.mp3test4.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

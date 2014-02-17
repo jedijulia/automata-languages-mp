@@ -1,5 +1,5 @@
 
-package up.cmsc141.julia.mp4.test1;
+package up.cmsc141.julia.mp4.test2;
 
 
 public class Tester {   

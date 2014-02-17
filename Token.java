@@ -1,5 +1,5 @@
 
-package up.cmsc141.julia.mp4.test1;
+package up.cmsc141.julia.mp4.test2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,30 @@ public class Token {
             category = Category.SEMICOLON;
         } else if (content.equals("*")) {
             category = Category.ASTERISK;
+        } else if (content.equals("||")) {
+            category = Category.ANDOR;
+        } else if (content.equals("&&")) {
+            category = Category.ANDOR;
+        } else if (content.equals("=")) {
+            category = Category.EQUALS;
+        } else if (content.equals("==")) {
+            category = Category.COMPARATOR;
+        } else if (content.equals("!=")) {
+            category = Category.COMPARATOR;
+        } else if (content.equals(">=")) {
+            category = Category.COMPARATOR;
+        } else if (content.equals("<=")) {
+            category = Category.COMPARATOR;
+        } else if (content.equals("+")) {
+            category = Category.OPERATION;
+        } else if (content.equals("-")) {
+            category = Category.OPERATION;
+        } else if (content.equals("/")) {
+            category = Category.OPERATION;
+        } else if (content.equals("++")) {
+            category = Category.INCDEC;
+        } else if (content.equals("--")) {
+            category = Category.INCDEC;
         } else {
             //if conent is none of the special characters above, calls categorizeText((
             category = categorizeText();
@@ -73,7 +97,16 @@ public class Token {
         if(isNum()) {
             return Category.NUMTEXT;
         } else {
-            return Category.VARTEXT;
+            char[] contentArray = content.toCharArray();
+            char firstChar = contentArray[0];
+            
+            if(content.equals("for")) {
+                return Category.FOR;
+            } else if(Character.isLetter(firstChar) || firstChar == '_') {
+                return Category.VARTEXT;
+            } else {
+                return Category.INVALIDCATEG;
+            }
         }
     }
     

@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package up.cmsc141.julia.mp4.test1;
+package up.cmsc141.julia.mp4.test2;
 
-import up.cmsc141.julia.mp3test4.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +28,15 @@ public class Tokenizer {
     StringBuilder builder = new StringBuilder();
     int length;
     
+    char[] lineArray = line.toCharArray();
     //loops through characters in line
-    for(char ch:line.toCharArray()) {
+    for(int i=0; i<lineArray.length; i++) {
         //checks if valid character
+        char ch = lineArray[i];
         if(isValidChar(ch)) {
             //if special character:
             if(isSpecialChar(ch)) {
+                System.out.println("GOT IN SPECIAL CHAR BECAUSE" + ch);
                 boolean isSpacePrev = false;
                 String tokenString = builder.toString();
                 //if the string in the builder is not empty
@@ -60,8 +62,185 @@ public class Tokenizer {
                 tokens.add(tokenNew);
                 //after character is added as token, it is deleted from the builder
                 builder.delete(0, 1);
+            } else if(isCompChar(ch)) {
+                System.out.println("GOT IN COMPCHAR BECAUSE" + ch);
+                String tokenString = builder.toString();
+                if(!tokenString.isEmpty()) {
+                    Token token = new Token(tokenString);
+                    tokens.add(token);
+                }
+
+                length = builder.length();
+                builder.delete(0, length);      
+                builder.append(ch);    
+            } else if(isPlusSign(ch)) {
+                System.out.println("GOT IN PLUS SIGN BECAUSE" +ch);
+                char next = lineArray[i+1];  
+                char prev = lineArray[i-1];
+                
+                if(isPlusSign(prev)) {
+                    builder.append(ch);
+                    String tokenString  = builder.toString();
+                    Token token = new Token(tokenString);
+                    tokens.add(token);
+                    
+                    length = builder.length();
+                    builder.delete(0, length); 
+                } else if(isPlusSign(next)) {
+                    String tokenString = builder.toString();
+                    if(!tokenString.isEmpty()) {
+                        Token token = new Token(tokenString);
+                        tokens.add(token);
+                    }
+                    
+                    length = builder.length();
+                    builder.delete(0, length);      
+                    builder.append(ch);
+                } else {
+                    String tokenString = builder.toString();
+                    if(!tokenString.isEmpty()) {
+                        Token token = new Token(tokenString);
+                        tokens.add(token);
+                    }
+                    length = builder.length();
+                    builder.delete(0, length);
+
+                    builder.append(ch);
+                    tokenString  = builder.toString();
+                    Token token = new Token(tokenString);
+                    tokens.add(token);
+                    
+                    length = builder.length();
+                    builder.delete(0, length);  
+                } 
+            } else if(isMinusSign(ch)) {
+                System.out.println("GOT IN MINUS SIGN BECAUSE" +ch);
+                char next = lineArray[i+1];  
+                char prev = lineArray[i-1];
+                
+                if(isMinusSign(prev)) {
+                    builder.append(ch);
+                    String tokenString  = builder.toString();
+                    Token token = new Token(tokenString);
+                    tokens.add(token);
+                    
+                    length = builder.length();
+                    builder.delete(0, length); 
+                } else if(isMinusSign(next)) {
+                    String tokenString = builder.toString();
+                    if(!tokenString.isEmpty()) {
+                        Token token = new Token(tokenString);
+                        tokens.add(token);
+                    }
+                    
+                    length = builder.length();
+                    builder.delete(0, length);      
+                    builder.append(ch);
+                } else {
+                    String tokenString = builder.toString();
+                    if(!tokenString.isEmpty()) {
+                        Token token = new Token(tokenString);
+                        tokens.add(token);
+                    }
+                    length = builder.length();
+                    builder.delete(0, length);
+
+                    builder.append(ch);
+                    tokenString  = builder.toString();
+                    Token token = new Token(tokenString);
+                    tokens.add(token);
+                    
+                    length = builder.length();
+                    builder.delete(0, length);  
+                } 
+            } else if(isEqualSign(ch)) {
+                System.out.println("GOT IN EQUALS SIGN BECAUSE" +ch);
+                char next = lineArray[i+1];  
+                char prev = lineArray[i-1];
+                
+                if(isEqualSign(prev) || isCompChar(prev)) {
+                    builder.append(ch);
+                    String tokenString  = builder.toString();
+                    Token token = new Token(tokenString);
+                    tokens.add(token);
+                    
+                    length = builder.length();
+                    builder.delete(0, length); 
+                } else if(isEqualSign(next)) {
+                    String tokenString = builder.toString();
+                    if(!tokenString.isEmpty()) {
+                        Token token = new Token(tokenString);
+                        tokens.add(token);
+                    }
+                    
+                    length = builder.length();
+                    builder.delete(0, length);      
+                    builder.append(ch);
+                } else {
+                    String tokenString = builder.toString();
+                    if(!tokenString.isEmpty()) {
+                        Token token = new Token(tokenString);
+                        tokens.add(token);
+                    }
+                    length = builder.length();
+                    builder.delete(0, length);
+
+                    builder.append(ch);
+                    tokenString  = builder.toString();
+                    Token token = new Token(tokenString);
+                    tokens.add(token);
+                    
+                    length = builder.length();
+                    builder.delete(0, length);  
+                } 
+            } else if(isAndOr(ch)) {
+                System.out.println("GOT IN ANDOR BECAUSE" +ch);
+                char next = lineArray[i+1];  
+                
+                if(isOr(ch)) {
+                    if(isOr(next)) {
+                        String tokenString = builder.toString();
+                        if(!tokenString.isEmpty()) {
+                            Token token = new Token(tokenString);
+                            tokens.add(token);
+                        }
+
+                        length = builder.length();
+                        builder.delete(0, length);      
+                        builder.append(ch);
+                    } else {
+                        builder.append(ch);
+                        String tokenString  = builder.toString();
+                        Token token = new Token(tokenString);
+                        tokens.add(token);
+
+                        length = builder.length();
+                        builder.delete(0, length);  
+                    }
+                } else {
+                    if(isAnd(next)) {
+                        String tokenString = builder.toString();
+                        if(!tokenString.isEmpty()) {
+                            Token token = new Token(tokenString);
+                            tokens.add(token);
+                        }
+
+                        length = builder.length();
+                        builder.delete(0, length);      
+                        builder.append(ch);
+                    } else {
+                        builder.append(ch);
+                        String tokenString  = builder.toString();
+                        Token token = new Token(tokenString);
+                        tokens.add(token);
+
+                        length = builder.length();
+                        builder.delete(0, length);  
+                    }                    
+                }                 
             //if space:
             } else if(isSpace(ch)) {
+                System.out.println("GOT IN SPACE BECAUSE" +ch);
                 String tokenString = builder.toString();
                 //if string in the builder is not empty, string is added as token
                 if(!tokenString.isEmpty()) {
@@ -74,9 +253,11 @@ public class Tokenizer {
             } else {
                 //character is added to builder
                 builder.append(ch);
+                System.out.println(ch);
             }
         } else {
             //invalid character
+            System.out.println("GOT IN INVALID CHARACTER BECAUSE" +ch);
             return false;
         }
     }
@@ -89,7 +270,7 @@ public class Tokenizer {
   }
   
   private boolean isValidChar(char c) {
-      if(isRegChar(c) || isSpecialChar(c) || isSpace(c)) {
+      if(isRegChar(c) || isSpecialChar(c) || isSpace(c) || isEqualSign(c) || isCompChar(c) || isAndOr(c) || isPlusSign(c) || isMinusSign(c)){
           return true;
       } else {
           return false;
@@ -124,7 +305,67 @@ public class Tokenizer {
           return true;
       } else if (c == ' ') {
           return true;   
-      }else {
+      } else {
+          return false;
+      }
+  }
+  
+  private boolean isEqualSign(char c) {
+      if (c == '=') {
+          return true;
+      } else {
+          return false;
+      }
+  }
+  
+  private boolean isPlusSign(char c) {
+      if (c == '+') {
+          return true;
+      } else {
+          return false;
+      }
+  }
+  
+  private boolean isMinusSign(char c) {
+      if (c == '-') {
+          return true;
+      } else {
+          return false;
+      }
+  }
+  
+  private boolean isCompChar(char c) {
+      if (c == '!') {
+          return true;
+      } else if (c == '>') {
+          return true;
+      } else if (c == '<') {
+          return true;
+      } else {
+          return false;
+      }
+  }
+  
+  private boolean isAndOr(char c) {
+      if (isOr(c) || isAnd(c)) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+  
+  private boolean isOr(char c) {
+      if (c == '|') {
+          return true;
+      } else {
+          return false;
+      }
+  }
+  
+  private boolean isAnd(char c) {
+      if (c == '&') {
+          return true;
+      } else {
           return false;
       }
   }
