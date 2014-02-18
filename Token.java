@@ -110,7 +110,7 @@ public class Token {
             
             if(content.equals("for")) {
                 return Category.FOR;
-            } else if(Character.isLetter(firstChar) || firstChar == '_') {
+            } else if((Character.isLetter(firstChar) || firstChar == '_') && !isReservedWord(content)) {
                 return Category.VARTEXT;
             } else {
                 return Category.INVALIDCATEG;
@@ -287,6 +287,19 @@ public class Token {
         } else {
             return false;
         }   
+    }
+    
+    public boolean isReservedWord(String s) {
+        if(s.equals("auto") || s.equals("else") || s. equals("swithc") || s.equals("break") ||
+           s.equals("enum") || s.equals("register") || s.equals("typedef") || s.equals("case") ||
+           s.equals("extern") || s.equals("return") || s.equals("union") || s.equals("const") ||
+           s.equals("continue") || s.equals("goto") || s.equals("sizeof") || s.equals("volatile") ||
+           s.equals("default") || s.equals("if") || s.equals("while") || s.equals("do") ||
+           s.equals("static") || s.equals("struct") || s.equals("_Packed")) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public String getContent() {
