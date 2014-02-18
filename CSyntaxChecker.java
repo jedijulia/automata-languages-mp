@@ -37,10 +37,10 @@ public class CSyntaxChecker {
 
                 boolean result = checker.check();
                 if(result) {
-                    bw.write("valid");
+                    bw.write("ACCEPTED");
                     bw.newLine();
                 } else {
-                    bw.write("invalid");
+                    bw.write("DENIED");
                     bw.newLine();
                 }
             }
