@@ -36,7 +36,7 @@ public class Tokenizer {
         if(isValidChar(ch)) {
             //if special character:
             if(isSpecialChar(ch)) {
-                System.out.println("GOT IN SPECIAL CHAR BECAUSE" + ch);
+                //System.out.println("GOT IN SPECIAL CHAR BECAUSE" + ch);
                 boolean isSpacePrev = false;
                 String tokenString = builder.toString();
                 //if the string in the builder is not empty
@@ -63,7 +63,7 @@ public class Tokenizer {
                 //after character is added as token, it is deleted from the builder
                 builder.delete(0, 1);
             } else if(isCompChar(ch)) {
-                System.out.println("GOT IN COMPCHAR BECAUSE" + ch);
+                //System.out.println("GOT IN COMPCHAR BECAUSE" + ch);
                 String tokenString = builder.toString();
                 if(!tokenString.isEmpty()) {
                     Token token = new Token(tokenString);
@@ -72,9 +72,15 @@ public class Tokenizer {
 
                 length = builder.length();
                 builder.delete(0, length);      
-                builder.append(ch);    
+                builder.append(ch);
+                tokenString  = builder.toString();
+                Token token = new Token(tokenString);
+                tokens.add(token);
+
+                length = builder.length();
+                builder.delete(0, length);   
             } else if(isPlusSign(ch)) {
-                System.out.println("GOT IN PLUS SIGN BECAUSE" +ch);
+                //System.out.println("GOT IN PLUS SIGN BECAUSE" +ch);
                 char next = lineArray[i+1];  
                 char prev = lineArray[i-1];
                 
@@ -114,7 +120,7 @@ public class Tokenizer {
                     builder.delete(0, length);  
                 } 
             } else if(isMinusSign(ch)) {
-                System.out.println("GOT IN MINUS SIGN BECAUSE" +ch);
+                //System.out.println("GOT IN MINUS SIGN BECAUSE" +ch);
                 char next = lineArray[i+1];  
                 char prev = lineArray[i-1];
                 
@@ -154,7 +160,7 @@ public class Tokenizer {
                     builder.delete(0, length);  
                 } 
             } else if(isEqualSign(ch)) {
-                System.out.println("GOT IN EQUALS SIGN BECAUSE" +ch);
+                //System.out.println("GOT IN EQUALS SIGN BECAUSE" +ch);
                 char next = lineArray[i+1];  
                 char prev = lineArray[i-1];
                 
@@ -194,7 +200,7 @@ public class Tokenizer {
                     builder.delete(0, length);  
                 } 
             } else if(isAndOr(ch)) {
-                System.out.println("GOT IN ANDOR BECAUSE" +ch);
+                //System.out.println("GOT IN ANDOR BECAUSE" +ch);
                 char next = lineArray[i+1];  
                 
                 if(isOr(ch)) {
@@ -240,7 +246,7 @@ public class Tokenizer {
                 }                 
             //if space:
             } else if(isSpace(ch)) {
-                System.out.println("GOT IN SPACE BECAUSE" +ch);
+                //ystem.out.println("GOT IN SPACE BECAUSE" +ch);
                 String tokenString = builder.toString();
                 //if string in the builder is not empty, string is added as token
                 if(!tokenString.isEmpty()) {
@@ -253,11 +259,11 @@ public class Tokenizer {
             } else {
                 //character is added to builder
                 builder.append(ch);
-                System.out.println(ch);
+                //System.out.println(ch);
             }
         } else {
             //invalid character
-            System.out.println("GOT IN INVALID CHARACTER BECAUSE" +ch);
+            //System.out.println("GOT IN INVALID CHARACTER BECAUSE" +ch);
             return false;
         }
     }
@@ -292,7 +298,9 @@ public class Tokenizer {
          c == ']' ||
          c == ',' ||
          c == ';' ||
-         c == '*'
+         c == '*' ||
+         c == '{' ||
+         c == '}'
       ) {
           return true;
       } else {

@@ -34,7 +34,9 @@ public enum Category {
    OPERATION(22, "OPERATION"),
    EQUALS(23, "EQUALS"),
    INCDEC(24, "INCDEC"),
-   FOR(25, "FOR");
+   FOR(25, "FOR"),
+   CLOSEBRACE(26, "CLOSEBRACE"),
+   OPENBRACE(27, "OPENBRACE");
    
    private final int value;
    private final String label;

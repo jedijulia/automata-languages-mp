@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class RandomTester {
     public static void main(String[] args) {
-        Tokenizer tokenizer =  new Tokenizer("for(int i=23; i>=5; i--)");
+        Tokenizer tokenizer =  new Tokenizer("for(x=9,y=4;x>5&&y;x--){x++;y++;ten+=45;}");
         List<Token> tokens = tokenizer.getTokens();
         for(Token token: tokens) {
             System.out.println(token.getContent());

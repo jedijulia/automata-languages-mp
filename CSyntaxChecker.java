@@ -19,13 +19,13 @@ public class CSyntaxChecker {
             Filereader fileReader = new Filereader();
             List<String> lines = new ArrayList<String>();
             
-            File file = new File("testoutput2.out");
+            File file = new File("testoutput3.out");
             file.createNewFile();
             fw = new java.io.FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(new FileWriter("testoutput2.out"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("testoutput3.out"));
             
             try {
-              lines = fileReader.readLines("mp3.in");
+              lines = fileReader.readLines("mp4input.in");
             } catch (Exception ex) {
               System.out.println("error");
             }

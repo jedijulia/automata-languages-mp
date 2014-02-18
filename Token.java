@@ -54,6 +54,10 @@ public class Token {
             category = Category.COMPARATOR;
         } else if (content.equals("<=")) {
             category = Category.COMPARATOR;
+        } else if (content.equals("<")) {
+            category = Category.COMPARATOR;
+        } else if (content.equals(">")) {
+            category = Category.COMPARATOR;
         } else if (content.equals("+")) {
             category = Category.OPERATION;
         } else if (content.equals("-")) {
@@ -64,7 +68,11 @@ public class Token {
             category = Category.INCDEC;
         } else if (content.equals("--")) {
             category = Category.INCDEC;
-        } else {
+        } else if (content.equals("{")) {
+            category = Category.OPENBRACE;
+        } else if (content.equals("}")) {
+            category = Category.CLOSEBRACE;
+        }  else {
             //if conent is none of the special characters above, calls categorizeText((
             category = categorizeText();
         }
