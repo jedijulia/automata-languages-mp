@@ -90,7 +90,8 @@ public enum State {
     SEMICOLONFORB(78, "SEMICOLONFORB"),
     ASSIGNOPFORB(79, "ASSIGNOPFORB"),
     SEMICOLONFINAL(80, "SEMICOLONFINAL"),
-    INCDECFORB(81, "INCDECFORB");
+    INCDECFORB(81, "INCDECFORB"),
+    COMPFORB(82, "COMPFORB");
    
    private final int value;
    private final String label;
