@@ -1,5 +1,5 @@
 
-package up.cmsc141.julia.mp4.test2;
+package up.cmsc141.julia.mp4.test3;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,8 +29,9 @@ public class CSyntaxChecker {
             } catch (Exception ex) {
               System.out.println("error");
             }
-
-            for(String line:lines) {
+            int n = Integer.parseInt(lines.get(0));
+            for(int i=1; i<=n; i++) {
+                String line = lines.get(i);
                 Tokenizer tokenizer = new Tokenizer(line);
                 List<Token> tokens = tokenizer.getTokens();
                 Checker checker = new Checker(tokens);

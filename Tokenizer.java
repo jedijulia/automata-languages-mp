@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package up.cmsc141.julia.mp4.test2;
+package up.cmsc141.julia.mp4.test3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -263,7 +263,7 @@ public class Tokenizer {
             }
         } else {
             //invalid character
-            //System.out.println("GOT IN INVALID CHARACTER BECAUSE" +ch);
+            System.out.println("GOT IN INVALID CHARACTER BECAUSE" +ch);
             return false;
         }
     }
@@ -276,7 +276,7 @@ public class Tokenizer {
   }
   
   private boolean isValidChar(char c) {
-      if(isRegChar(c) || isSpecialChar(c) || isSpace(c) || isEqualSign(c) || isCompChar(c) || isAndOr(c) || isPlusSign(c) || isMinusSign(c)){
+      if(isRegChar(c) || isSpecialChar(c) || isSpace(c) || isEqualSign(c) || isCompChar(c) || isAndOr(c) || isOperator(c)){
           return true;
       } else {
           return false;
@@ -326,6 +326,14 @@ public class Tokenizer {
       }
   }
   
+  private boolean isOperator(char c) {
+      if( isPlusSign(c) || isMinusSign(c) || isDivisionSign(c) || isModulo(c)) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+  
   private boolean isPlusSign(char c) {
       if (c == '+') {
           return true;
@@ -340,6 +348,22 @@ public class Tokenizer {
       } else {
           return false;
       }
+  }
+  
+  private boolean isDivisionSign(char c) {
+      if (c == '/') {
+          return true;
+      } else {
+          return false;
+      }    
+  }
+  
+  private boolean isModulo(char c) {
+      if (c == '%') {
+          return true;
+      } else {
+          return false;
+      }    
   }
   
   private boolean isCompChar(char c) {
