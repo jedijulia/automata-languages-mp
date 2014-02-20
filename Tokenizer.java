@@ -1,8 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package up.cmsc141.julia.mp4.test3;
+
+package up.cmsc141.julia.mp4final;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,46 +60,52 @@ public class Tokenizer {
                 //after character is added as token, it is deleted from the builder
                 builder.delete(0, 1);
             } else if(isCompChar(ch)) {
-                //System.out.println("GOT IN COMPCHAR BECAUSE" + ch);
+                //previous string in the builder is added as a new token
                 String tokenString = builder.toString();
                 if(!tokenString.isEmpty()) {
                     Token token = new Token(tokenString);
                     tokens.add(token);
                 }
-
+                //builder contents are cleared and current character is added as a token
                 length = builder.length();
                 builder.delete(0, length);      
                 builder.append(ch);
                 tokenString  = builder.toString();
                 Token token = new Token(tokenString);
                 tokens.add(token);
-
+                
+                //builder contents are cleared
                 length = builder.length();
                 builder.delete(0, length);   
             } else if(isPlusSign(ch)) {
-                //System.out.println("GOT IN PLUS SIGN BECAUSE" +ch);
                 char next = lineArray[i+1];  
                 char prev = lineArray[i-1];
                 
+                //if the previous character was also a plus sign
                 if(isPlusSign(prev)) {
+                    //ch is added to the builder, then added as a token
                     builder.append(ch);
                     String tokenString  = builder.toString();
                     Token token = new Token(tokenString);
                     tokens.add(token);
                     
+                    //builder contents cleared
                     length = builder.length();
                     builder.delete(0, length); 
+                //if the next character is a plus sign
                 } else if(isPlusSign(next)) {
+                    //previous string added as token
                     String tokenString = builder.toString();
                     if(!tokenString.isEmpty()) {
                         Token token = new Token(tokenString);
                         tokens.add(token);
                     }
-                    
+                    //builder cleared and ch appended
                     length = builder.length();
                     builder.delete(0, length);      
                     builder.append(ch);
                 } else {
+                    //previous string added as token and builder cleared
                     String tokenString = builder.toString();
                     if(!tokenString.isEmpty()) {
                         Token token = new Token(tokenString);
@@ -110,17 +113,16 @@ public class Tokenizer {
                     }
                     length = builder.length();
                     builder.delete(0, length);
-
+                    //ch appended and added as token
                     builder.append(ch);
                     tokenString  = builder.toString();
                     Token token = new Token(tokenString);
                     tokens.add(token);
-                    
+                    //builder contents cleared
                     length = builder.length();
                     builder.delete(0, length);  
                 } 
             } else if(isMinusSign(ch)) {
-                //System.out.println("GOT IN MINUS SIGN BECAUSE" +ch);
                 char next = lineArray[i+1];  
                 char prev = lineArray[i-1];
                 
@@ -160,7 +162,6 @@ public class Tokenizer {
                     builder.delete(0, length);  
                 } 
             } else if(isEqualSign(ch)) {
-                //System.out.println("GOT IN EQUALS SIGN BECAUSE" +ch);
                 char next = lineArray[i+1];  
                 char prev = lineArray[i-1];
                 
@@ -200,7 +201,6 @@ public class Tokenizer {
                     builder.delete(0, length);  
                 } 
             } else if(isAndOr(ch)) {
-                //System.out.println("GOT IN ANDOR BECAUSE" +ch);
                 char next = lineArray[i+1];  
                 
                 if(isOr(ch)) {
@@ -246,7 +246,6 @@ public class Tokenizer {
                 }                 
             //if space:
             } else if(isSpace(ch)) {
-                //ystem.out.println("GOT IN SPACE BECAUSE" +ch);
                 String tokenString = builder.toString();
                 //if string in the builder is not empty, string is added as token
                 if(!tokenString.isEmpty()) {
@@ -259,11 +258,9 @@ public class Tokenizer {
             } else {
                 //character is added to builder
                 builder.append(ch);
-                //System.out.println(ch);
             }
         } else {
             //invalid character
-            System.out.println("GOT IN INVALID CHARACTER BECAUSE" +ch);
             return false;
         }
     }

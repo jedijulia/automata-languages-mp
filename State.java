@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package up.cmsc141.julia.mp4.test3;
 
-/**
- *
- * @author juliam
- */
+package up.cmsc141.julia.mp4final;
+
+
 public enum State {
     START(0, "START"),
     TYPEDEC(1, "TYPEDEC"),
@@ -91,7 +85,11 @@ public enum State {
     ASSIGNOPFORB(79, "ASSIGNOPFORB"),
     SEMICOLONFINAL(80, "SEMICOLONFINAL"),
     INCDECFORB(81, "INCDECFORB"),
-    COMPFORB(82, "COMPFORB");
+    COMPFORB(82, "COMPFORB"),
+    NUMFORBTWO(83, "NUMFORBTW"),
+    ANDORINIT(84, "ANDORINIT"),
+    ANDORINC(85, "ANDORINC"),
+    ANDORFORB(86, "ANDORFORB");
    
    private final int value;
    private final String label;

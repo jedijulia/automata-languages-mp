@@ -1,5 +1,5 @@
 
-package up.cmsc141.julia.mp4.test3;
+package up.cmsc141.julia.mp4final;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,13 +19,13 @@ public class CSyntaxChecker {
             Filereader fileReader = new Filereader();
             List<String> lines = new ArrayList<String>();
             
-            File file = new File("testoutput3.out");
+            File file = new File("mp4.out");
             file.createNewFile();
             fw = new java.io.FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(new FileWriter("testoutput3.out"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("mp4.out"));
             
             try {
-              lines = fileReader.readLines("mp4input.in");
+              lines = fileReader.readLines("mp4.in");
             } catch (Exception ex) {
               System.out.println("error");
             }
