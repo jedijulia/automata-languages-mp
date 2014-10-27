@@ -1,3 +1,3 @@
 c-syntax-checker
 ================
-a syntax checker for C 
+simple syntax checker for the C language
